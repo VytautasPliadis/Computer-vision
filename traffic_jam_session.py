@@ -17,8 +17,8 @@ import os
 
 cap = cv2.VideoCapture('D:\OBSRR\Video.mov')
 
-areamin = 200  # spalvos detekctinimo plotas  
-areamax = 1000  # spalvos detekctinimo plotas
+areamin = 200  # spalvos detektinimo plotas  
+areamax = 1000  # spalvos detektinimo plotas
 
 # -----------------------------------------------------------
 interested = ['car', 'truck', 'bus']
@@ -28,7 +28,6 @@ classNames = []
 classFile = 'Resources/coco.names'
 with open(classFile) as f:
     classNames = f.read().rstrip('\n').split('\n')
-    # print(classNames)
 
 configPath = 'Resources/ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt'
 weightsPath = 'Resources/frozen_inference_graph.pb'
@@ -76,7 +75,6 @@ def get_dims(cap, res='1080p'):
 # Types of Codes: http://www.fourcc.org/codecs.php
 VIDEO_TYPE = {
     'avi': cv2.VideoWriter_fourcc(*'XVID'),
-    # 'mp4': cv2.VideoWriter_fourcc(*'H264'),
     'mp4': cv2.VideoWriter_fourcc(*'XVID'),
 }
 
@@ -93,7 +91,7 @@ out = cv2.VideoWriter(filename, get_video_type(filename), 25, get_dims(cap, res)
 while True:
     success, img = cap.read()
     thresh = 0.6
-    classIds, confs, bbox = net.detect(img, confThreshold=thresh)  # ['person']
+    classIds, confs, bbox = net.detect(img, confThreshold=thresh)
     if interested is None:
         interested = classNames
 
